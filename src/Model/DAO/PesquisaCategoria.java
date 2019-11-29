@@ -1,5 +1,5 @@
 
-package Model.DAO;
+package model.dao;
 
 
 public class PesquisaCategoria {

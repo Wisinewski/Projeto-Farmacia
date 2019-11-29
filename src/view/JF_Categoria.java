@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package view;
 
-import Control.Categoria;
-import Model.Entidades.CategoriaEnt;
+import model.entities.Categoria;
+import controller.CategoriaController;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -122,10 +123,10 @@ public class JF_Categoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CadastrarActionPerformed
-        CategoriaEnt categoria =  new CategoriaEnt(null,txt_categoria.getText());
+        Categoria categoria =  new Categoria(null,txt_categoria.getText());
      
         try {
-            Categoria catController = new Categoria(categoria);
+            CategoriaController catController = new CategoriaController(categoria);
         } catch (SQLException ex) {
             Logger.getLogger(JF_Categoria.class.getName()).log(Level.SEVERE, null, ex);
         }

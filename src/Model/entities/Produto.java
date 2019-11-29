@@ -1,8 +1,8 @@
 
-package Model.Entidades;
+package model.entities;
 
 
-public class ProdutoEnt {
+public class Produto {
     Integer idproduto;
     String nome;
     Double preco;
@@ -10,9 +10,9 @@ public class ProdutoEnt {
     String validade;
     String lote;
     int prescricao;
-    CategoriaEnt categoria;
+    Categoria categoria;
     
-    public ProdutoEnt(Integer idproduto,String nome, Double preco, Integer qtd, String validade, String lote, int prescricao, CategoriaEnt categoria) {
+    public Produto(Integer idproduto,String nome, Double preco, Integer qtd, String validade, String lote, int prescricao, Categoria categoria) {
      
         this.idproduto = idproduto;
         this.nome = nome;
@@ -73,11 +73,11 @@ public class ProdutoEnt {
     }
 
   
-    public CategoriaEnt getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(CategoriaEnt categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
    

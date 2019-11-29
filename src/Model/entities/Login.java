@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Entidades;
+package model.entities;
 
-public class LoginEnt {
+public class Login {
    
    private String nome;
    private String senha;
    
-   public LoginEnt(String nome, String senha) {    
+   public Login(String nome, String senha) {    
    }
    
 }

@@ -1,19 +1,19 @@
 
-package Model.Entidades;
+package model.entities;
 
 import java.util.Objects;
 
 
-public class CategoriaEnt {
+public class Categoria {
 
     private String nome;
     private Integer id;
     
-    public CategoriaEnt()
+    public Categoria()
     {
         
     }
-    public CategoriaEnt(Integer id, String nome)
+    public Categoria(Integer id, String nome)
     {
      this.id = id;
      this.nome = nome;   
@@ -44,7 +44,7 @@ public class CategoriaEnt {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CategoriaEnt other = (CategoriaEnt) obj;
+        final Categoria other = (Categoria) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

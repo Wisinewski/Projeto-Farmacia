@@ -1,8 +1,7 @@
 
-package Control;
+package controller;
 
 
-import Model.DAO.LoginDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,12 +9,14 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import model.dao.LoginDAO;
 
-public class Login {
+
+public class LoginController {
   private String login;
   private String senha;
    
-    public Login(String login, String senha) {
+    public LoginController(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }

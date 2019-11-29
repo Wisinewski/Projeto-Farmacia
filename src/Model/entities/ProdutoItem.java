@@ -1,4 +1,4 @@
-package Model.Entidades;
+package model.entities;
 
 public class ProdutoItem {
 	private Long idpedido;

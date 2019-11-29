@@ -1,9 +1,10 @@
 
-package Model.DAO;
+package model.dao;
 
 
-import Model.DAO.Conexao1;
-import Model.Entidades.CategoriaEnt;
+import model.entities.Categoria;
+import model.dao.Conexao1;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import javax.swing.SpringLayout;
 
 public class CategoriaDAO {
     
-    public boolean  InsertCategoriaDAO(CategoriaEnt categoria) throws SQLException
+    public boolean  InsertCategoriaDAO(Categoria categoria) throws SQLException
     {
         Connection conexao = Conexao1.getConnection();
          
@@ -42,8 +43,8 @@ public class CategoriaDAO {
     }
     
     
-    public List<CategoriaEnt> BuscarCategorias() throws SQLException {
-        List<CategoriaEnt> lst_categoria = new ArrayList<>();
+    public List<Categoria> BuscarCategorias() throws SQLException {
+        List<Categoria> lst_categoria = new ArrayList<>();
        
      
         Connection conexao = Conexao1.getConnection();
@@ -56,7 +57,7 @@ public class CategoriaDAO {
 
         while (rs.next()) {           
             
-            CategoriaEnt categoriaEnt =  new CategoriaEnt(rs.getInt("idcategoria"),rs.getString("nome"));
+            Categoria categoriaEnt =  new Categoria(rs.getInt("idcategoria"),rs.getString("nome"));
             lst_categoria.add(categoriaEnt);
         }
         pstmt.close();

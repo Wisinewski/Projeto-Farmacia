@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package view;
 
 
-import Control.Login;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import controller.LoginController;
 
 /**
  *
@@ -149,7 +150,7 @@ public class JF_Login extends javax.swing.JFrame {
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
      
        
-       Login logar = new Login(txt_login.getText(), txt_senha.getText());
+       LoginController logar = new LoginController(txt_login.getText(), txt_senha.getText());
         try {
            logar.Logar();
             

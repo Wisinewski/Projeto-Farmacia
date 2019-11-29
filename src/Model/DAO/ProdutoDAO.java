@@ -1,9 +1,10 @@
 
-package Model.DAO;
+package model.dao;
 
-import Control.Produto;
-import Model.Entidades.CategoriaEnt;
-import Model.Entidades.ProdutoEnt;
+import model.entities.Categoria;
+import model.entities.Produto;
+import controller.ProdutoController;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 public class ProdutoDAO {
     
  
-    public boolean  InsertProduto(ProdutoEnt objProduto) throws SQLException
+    public boolean  InsertProduto(Produto objProduto) throws SQLException
     {
         Connection conexao = Conexao1.getConnection();
          

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package view;
 
-import Control.Categoria;
-import Control.Produto;
-import Model.Entidades.CategoriaEnt;
-import Model.Entidades.ProdutoEnt;
+import model.entities.Categoria;
+import model.entities.Produto;
+import controller.CategoriaController;
+import controller.ProdutoController;
+
 import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,8 +25,8 @@ import java.util.logging.Logger;
 public class JF_CadastroProduto extends javax.swing.JFrame {
 
     int receita = 0;
-    Categoria categoria = new Categoria();
-    CategoriaEnt objCategoria =  new CategoriaEnt();
+    CategoriaController categoria = new CategoriaController();
+    Categoria objCategoria =  new Categoria();
     public JF_CadastroProduto() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -234,9 +235,9 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         int qtd = (Integer) qtd_produto.getValue();
 
         // Passando os parametros para a classe Produto
-        ProdutoEnt objproduto = new ProdutoEnt(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
+        Produto objproduto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
         try {
-            Produto cadastroProduto = new Produto(objproduto);
+            ProdutoController cadastroProduto = new ProdutoController(objproduto);
             
             // Recebendo todos os valores da classe produto que foi instanciado
             /*
@@ -341,9 +342,9 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
       // Listando as categorias do banco
      
  
-        List<CategoriaEnt> lst_categoria = categoria.listarCategoria();
+        List<Categoria> lst_categoria = categoria.listarCategoria();
         
-        for (CategoriaEnt c : lst_categoria) {
+        for (Categoria c : lst_categoria) {
            
             cmb_categoria.addItem(c.getId()+"- "+c.getNome());    
         }

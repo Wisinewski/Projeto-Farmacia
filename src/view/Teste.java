@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package view;
 
 
-import Control.Categoria;
-import Model.DAO.LoginDAO;
-import Model.Entidades.CategoriaEnt;
+import model.dao.LoginDAO;
+import model.entities.Categoria;
+import controller.CategoriaController;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
