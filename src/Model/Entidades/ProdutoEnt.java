@@ -3,8 +3,6 @@ package Model.Entidades;
 
 
 public class ProdutoEnt {
-
-    
     Integer idproduto;
     String nome;
     Double preco;

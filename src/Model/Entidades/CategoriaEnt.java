@@ -50,9 +50,5 @@ public class CategoriaEnt {
         }
         return true;
     }
-  
-            
-    
-    
     
 }

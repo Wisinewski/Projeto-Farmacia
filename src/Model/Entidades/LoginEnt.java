@@ -10,12 +10,7 @@ public class LoginEnt {
    private String nome;
    private String senha;
    
-   public LoginEnt(String nome, String senha)
-   {
-       
+   public LoginEnt(String nome, String senha) {    
    }
    
-    
-    
-    
 }
