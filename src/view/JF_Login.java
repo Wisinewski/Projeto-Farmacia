@@ -6,11 +6,8 @@
 package view;
 
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import controller.LoginController;
+import model.entities.Login;
 
 /**
  *
@@ -149,14 +146,9 @@ public class JF_Login extends javax.swing.JFrame {
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
      
-       
-       LoginController logar = new LoginController(txt_login.getText(), txt_senha.getText());
-        try {
-           logar.Logar();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(JF_Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       Login login = new Login(txt_login.getText(), txt_senha.getText());
+       LoginController loginController = new LoginController();
+       loginController.verify(login);
         
      
 

@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import db.DB;
 import model.dao.LoginDao;
 import model.entities.Login;
 
@@ -26,15 +25,15 @@ public class LoginDaoJDBC implements LoginDao {
 		this.conexao = conexao;
 	}
 
-    public boolean verify(String nome, String senha) {
+    public boolean verify(Login login) {
 
         boolean result = false;
         try {
         PreparedStatement pstmt
                 = conexao.prepareStatement(
                         "SELECT * FROM login where nm_login = ? and ds_senha = ?");
-        pstmt.setString(1, nome);
-        pstmt.setString(2, senha);
+        pstmt.setString(1, login.getNome());
+        pstmt.setString(2, login.getSenha());
 
         ResultSet rs = pstmt.executeQuery();
 

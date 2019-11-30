@@ -12,5 +12,5 @@ public interface LoginDao {
 	Login findById(Long id);
 	List<Login> findAll();
 	
-	boolean verify(String nome, String senha);
+	boolean verify(Login login);
 }
