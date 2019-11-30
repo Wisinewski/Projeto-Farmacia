@@ -3,17 +3,19 @@ package model.entities;
 
 
 public class Produto {
-    Integer idproduto;
-    String nome;
-    Double preco;
-    Integer qtd;
-    String validade;
-    String lote;
-    int prescricao;
-    Categoria categoria;
+    private Integer idproduto;
+    private String nome;
+    private Double preco;
+    private Integer qtd;
+    private String validade;
+    private String lote;
+    private int prescricao;
+    private Categoria categoria;
+    
+    public Produto() {
+    }
     
     public Produto(Integer idproduto,String nome, Double preco, Integer qtd, String validade, String lote, int prescricao, Categoria categoria) {
-     
         this.idproduto = idproduto;
         this.nome = nome;
         this.preco = preco;
@@ -71,7 +73,6 @@ public class Produto {
     public void setPrescricao(int prescricao) {
         this.prescricao = prescricao;
     }
-
   
     public Categoria getCategoria() {
         return categoria;
@@ -88,10 +89,4 @@ public class Produto {
 				+ categoria + "]";
 	}
    
- 
-    
-    
-    
-    
-    
 }

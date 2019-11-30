@@ -26,7 +26,7 @@ public class LoginDaoJDBC implements LoginDao {
 		this.conexao = conexao;
 	}
 
-    public boolean logar(String nome, String senha) {
+    public boolean verify(String nome, String senha) {
 
         boolean result = false;
         try {

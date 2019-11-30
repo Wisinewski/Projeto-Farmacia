@@ -21,7 +21,7 @@ public class LoginController {
        boolean a ;
        
        LoginDao logar = DaoFactory.createLoginDao();
-       a =  logar.logar(login, senha);
+       a =  logar.verify(login, senha);
        
       System.out.println(""+a);   
       return false;

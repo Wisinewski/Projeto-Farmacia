@@ -9,28 +9,27 @@ public class Categoria {
     private String nome;
     private Integer id;
     
-    public Categoria()
-    {
-        
+    public Categoria() {  
     }
-    public Categoria(Integer id, String nome)
-    {
-     this.id = id;
-     this.nome = nome;   
+    
+    public Categoria(Integer id, String nome) {
+    	this.id = id;
+    	this.nome = nome;   
     }
-      public String getNome() {
-      return nome;
+    
+    public String getNome() {
+    	return nome;
     }
 
     public Integer getId() {
         return id;
     }
-    public void setNome(String nm)
-    {
+    
+    public void setNome(String nm) {
         this.nome =  nm;
     }
     
-@Override
+    @Override
     public int hashCode() {
         int hash = 7;
         return hash;
@@ -50,5 +49,10 @@ public class Categoria {
         }
         return true;
     }
+
+	@Override
+	public String toString() {
+		return "Categoria [nome=" + nome + ", id=" + id + "]";
+	}
     
 }
