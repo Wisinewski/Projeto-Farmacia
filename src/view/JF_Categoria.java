@@ -125,11 +125,8 @@ public class JF_Categoria extends javax.swing.JFrame {
     private void btn_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CadastrarActionPerformed
         Categoria categoria =  new Categoria(null,txt_categoria.getText());
      
-        try {
-            CategoriaController catController = new CategoriaController(categoria);
-        } catch (SQLException ex) {
-            Logger.getLogger(JF_Categoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        CategoriaController catController = new CategoriaController();
+		catController.insert(categoria);
         
     }//GEN-LAST:event_btn_CadastrarActionPerformed
 

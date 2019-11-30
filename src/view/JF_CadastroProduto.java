@@ -235,25 +235,10 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         int qtd = (Integer) qtd_produto.getValue();
 
         // Passando os parametros para a classe Produto
-        Produto objproduto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
-        try {
-            ProdutoController cadastroProduto = new ProdutoController(objproduto);
-            
-            // Recebendo todos os valores da classe produto que foi instanciado
-            /*
-            System.out.println("-------------------------------------------");
-            System.out.println("Nome Produto:"+produto.getNome());
-            System.out.println("Preco:"+produto.getPreco());
-            System.out.println("Vencimento:"+produto.getValidade());
-            System.out.println("Lote:"+produto.getLote());
-            System.out.println("Categoria:"+categoria.getNome());
-            System.out.println("Qtd:"+produto.getQtd());
-            System.out.println("Receita:"+produto.getPrescricao());
-            System.out.println("-------------------------------------------");
-            */
-        } catch (SQLException ex) {
-            Logger.getLogger(JF_CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Produto produto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
+        System.out.println(produto);
+        ProdutoController cadastroProduto = new ProdutoController();
+		cadastroProduto.insert(produto);
 
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 

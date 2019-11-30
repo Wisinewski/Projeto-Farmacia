@@ -1,63 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
-/**
- *
- * @author Javassim
- */
-public class LoginDAO {
+import model.entities.Login;
 
-    public boolean Pesquisar(String nome, String senha) throws SQLException {
+public interface LoginDao {
 
-        boolean result = false;
-        Connection conexao = Conexao1.getConnection();
-        PreparedStatement pstmt
-                = conexao.prepareStatement(
-                        "SELECT * FROM login where nm_login = ? and ds_senha = ?");
-        pstmt.setString(1, nome);
-        pstmt.setString(2, senha);
-
-        ResultSet rs = pstmt.executeQuery();
-
-        if (rs.next()) {
-            System.out.println("Encontrado");
-            result = true;
-
-        }
-        pstmt.close();
-        return result;
-
-    }
-
-    public boolean Incluir(String nome, String senha) throws SQLException {
-        Connection conexao = Conexao1.getConnection();
-
-        PreparedStatement insert;
-        String conteudo = "INSERT INTO login (nm_login,ds_senha)"
-                + " VALUES (?,?)";
-
-        insert = conexao.prepareStatement(conteudo);
-
-        insert.setString(1, nome);
-        insert.setString(2, senha);
-
-        int registros = insert.executeUpdate();
-        insert.close();// fecha a conexao
-        if (registros == 1) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
+	void insert(Login login);
+	void update(Login login);
+	void deleteById(Long id);
+	Login findById(Long id);
+	List<Login> findAll();
+	
+	boolean logar(String nome, String senha);
 }

@@ -1,19 +1,36 @@
 package controller;
 
-import model.entities.Produto;
-import model.dao.ProdutoDAO;
+import java.util.List;
 
-import java.sql.SQLException;
+import model.dao.DaoFactory;
+import model.dao.ProdutoDao;
+import model.entities.Produto;
 
 public class ProdutoController {
-    ProdutoDAO produto = new ProdutoDAO();
+    ProdutoDao produtoDao = DaoFactory.createProdutoDao();
     
-  public ProdutoController(Produto objproduto) throws SQLException {
-      produto.InsertProduto(objproduto);
-      
-  }
+    public ProdutoController() {
+    }
+    
+    public void insert(Produto produto) {
+    	produtoDao.insert(produto); 
+    }
+    
+    public void update(Produto produto) {
+    	produtoDao.update(produto);
+    }
+    
+    public void deleteById(Long id) {
+    	produtoDao.deleteById(id);
+    }
+    
+    public Produto findById(Long id) {
+    	return produtoDao.findById(id);
+    }
   
+    public List<Produto> findAll() {
+    	List<Produto> listaProdutos = produtoDao.findAll();
+    	return listaProdutos;
+    }
 
-  
-    
 }

@@ -80,6 +80,13 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+	@Override
+	public String toString() {
+		return "Produto [idproduto=" + idproduto + ", nome=" + nome + ", preco=" + preco + ", qtd=" + qtd
+				+ ", validade=" + validade + ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
+				+ categoria + "]";
+	}
    
  
     

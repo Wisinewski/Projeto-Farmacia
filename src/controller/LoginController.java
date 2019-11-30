@@ -2,14 +2,10 @@
 package controller;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import model.dao.LoginDAO;
+import model.dao.DaoFactory;
+import model.dao.LoginDao;
 
 
 public class LoginController {
@@ -24,8 +20,8 @@ public class LoginController {
    {
        boolean a ;
        
-       LoginDAO logar = new LoginDAO();
-       a =  logar.Pesquisar(login, senha);
+       LoginDao logar = DaoFactory.createLoginDao();
+       a =  logar.logar(login, senha);
        
       System.out.println(""+a);   
       return false;

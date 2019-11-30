@@ -1,29 +1,37 @@
 package controller;
 
-import model.entities.Categoria;
-import model.dao.CategoriaDAO;
-import model.dao.Conexao1;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import model.dao.CategoriaDao;
+import model.dao.DaoFactory;
+import model.entities.Categoria;
+
 public class CategoriaController {
-  CategoriaDAO categoria = new CategoriaDAO();
+	CategoriaDao categoriaDao = DaoFactory.createCategoriaDao();
+	
+	public CategoriaController() {
+	}
   
-    public CategoriaController(Categoria objCate) throws SQLException {
-       
-        categoria.InsertCategoriaDAO(objCate);
-    }
-    public CategoriaController()
-    {
-        
+    public void insert(Categoria categoria) {
+        categoriaDao.insert(categoria);
     }
     
-    public List<Categoria> listarCategoria() throws SQLException
-    {     
-        List<Categoria> lst_categoria = categoria.BuscarCategorias();    
-        return lst_categoria;       
+    public void update(Categoria categoria) {
+    	categoriaDao.update(categoria);
+    }
+    
+    public void deleteById(Long id) {
+    	categoriaDao.deleteById(id);
+    }
+    
+    public Categoria findById(Long id) {
+    	return categoriaDao.findById(id);
+    }
+    
+	public List<Categoria> listarCategoria() throws SQLException {     
+        List<Categoria> listaCategorias = categoriaDao.findAll();    
+        return listaCategorias;       
     }
 
 }

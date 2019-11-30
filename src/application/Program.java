@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package application;
 
 
-import model.dao.LoginDAO;
+import model.dao.impl.LoginDaoJDBC;
 import model.entities.Categoria;
 import controller.CategoriaController;
 
@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Morais
  */
-public class Teste {
+public class Program {
 
     /**
      * @param args the command line arguments

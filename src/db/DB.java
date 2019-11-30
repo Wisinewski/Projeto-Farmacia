@@ -1,11 +1,11 @@
-package model.dao;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class Conexao1 {
+public class DB {
 
     private static Connection conexao = null;
 
@@ -15,7 +15,7 @@ public class Conexao1 {
             try {
                 Class.forName("org.sqlite.JDBC");
             //  String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Documents/prj_Farmacia/pharma.db";
-                String url = "jdbc:sqlite:C:/Users/wisinewski/Desktop/projetin/Projeto-Farmacia";
+                String url = "jdbc:sqlite:C:/Users/wisinewski/Desktop/projetin/Projeto-Farmacia/pharma.db";
                 conexao = DriverManager.getConnection(url);
                 System.out.println("Banco Conectado!");
             } catch (Exception erro) {
@@ -39,12 +39,6 @@ public class Conexao1 {
                 e.printStackTrace();
             }
            
-        }
-        
+        }   
     }
-
-    public Connection getConexao() {
-        return conexao;
-    }
-
 }
