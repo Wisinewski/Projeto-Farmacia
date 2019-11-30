@@ -14,7 +14,8 @@ public class Conexao1 {
         if (conexao == null) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Documents/prj_Farmacia/pharma.db";
+            //  String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Documents/prj_Farmacia/pharma.db";
+                String url = "jdbc:sqlite:C:/Users/wisinewski/Desktop/projetin/Projeto-Farmacia";
                 conexao = DriverManager.getConnection(url);
                 System.out.println("Banco Conectado!");
             } catch (Exception erro) {
