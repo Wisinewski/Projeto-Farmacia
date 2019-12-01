@@ -13,6 +13,7 @@ public class ProdutoController {
     }
     
     public void insert(Produto produto) {
+        
     	produtoDao.insert(produto); 
     }
     

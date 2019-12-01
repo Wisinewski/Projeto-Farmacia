@@ -25,8 +25,12 @@ import java.util.logging.Logger;
 public class JF_CadastroProduto extends javax.swing.JFrame {
 
     int receita = 0;
+  
     CategoriaController categoria = new CategoriaController();
-    Categoria objCategoria =  new Categoria();
+    Categoria objCategoria = new Categoria();
+    // Preenche a lista com a lista de categoria do banco de dados
+    List<Categoria> lst_categoria = categoria.listarCategoria();
+
     public JF_CadastroProduto() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -229,16 +233,17 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
-        // TODO add your handling code here:
-   
 
         int qtd = (Integer) qtd_produto.getValue();
-
+  
+        
+        //pegando a categoria para realizar pesquisa no Banco
+        objCategoria = ProcurarCategoria(cmb_categoria .getSelectedItem().toString());
         // Passando os parametros para a classe Produto
         Produto produto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
         System.out.println(produto);
         ProdutoController cadastroProduto = new ProdutoController();
-		cadastroProduto.insert(produto);
+        cadastroProduto.insert(produto);
 
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 
@@ -293,8 +298,7 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
             public void run() {
                 try {
                     new JF_CadastroProduto().setVisible(true);
-                }
-                catch (SQLException ex) {
+                } catch (SQLException ex) {
                     Logger.getLogger(JF_CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -324,14 +328,28 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void carregarcategoria() throws SQLException {
-      // Listando as categorias do banco
-     
- 
-        List<Categoria> lst_categoria = categoria.listarCategoria();
-        
+        // Listando as categorias do banco
         for (Categoria c : lst_categoria) {
-           
-            cmb_categoria.addItem(c.getId()+"- "+c.getNome());    
+            cmb_categoria.addItem(c.getNome());
         }
     }
+
+    private Categoria ProcurarCategoria(String categ_selecionada) {
+
+        try {
+
+            for (Categoria c : lst_categoria) {
+                if (c.getNome().equals(categ_selecionada)) {
+                    System.out.println("" + c.getNome());
+                    return c;
+                  
+                }
+
+            }
+            
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 }
