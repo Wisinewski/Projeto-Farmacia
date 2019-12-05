@@ -5,7 +5,6 @@
  */
 package view;
 
-import com.sun.prism.j2d.J2DPipeline;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,13 +12,13 @@ import java.util.logging.Logger;
 public class JF_Menu extends javax.swing.JFrame {
 
     JF_CadastroProduto cadastroProduto;
-      JF_Login login;
+    JF_Login login;
+    JF_Pedido pedido;
 
     public JF_Menu() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
-        cadastroProduto = new JF_CadastroProduto();
-        login = new JF_Login();
+
     }
 
     /**
@@ -37,6 +36,7 @@ public class JF_Menu extends javax.swing.JFrame {
         btn_categoria = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         btn_sair = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -74,22 +74,31 @@ public class JF_Menu extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setText("Home");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_sair)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btn_categoria)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_categoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(btn_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btn_sair)
-                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +111,9 @@ public class JF_Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,23 +140,43 @@ public class JF_Menu extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(JF_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
+
         this.dispose();
     }//GEN-LAST:event_btn_categoriaActionPerformed
 
     private void btn_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_produtoActionPerformed
+        JF_CadastroProduto produto;
+        try {
+            produto = new JF_CadastroProduto();
+            produto.show(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(JF_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        cadastroProduto.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
+
+
     }//GEN-LAST:event_btn_produtoActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
+        JF_Login login;
 
-        this.setVisible(false);
-        login.setVisible(true);
+        login = new JF_Login();
+        login.show(true);
+
+        this.dispose();
 
 
     }//GEN-LAST:event_btn_sairActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        JF_Home home;
+
+        home = new JF_Home();
+        home.show(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,5 +224,6 @@ public class JF_Menu extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

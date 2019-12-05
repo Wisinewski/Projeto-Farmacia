@@ -184,15 +184,14 @@ public class JF_Login extends javax.swing.JFrame {
         Login login = new Login(txt_login.getText(), txt_senha.getText());
         LoginController loginController = new LoginController();
         if (loginController.verify(login)) {
-            JF_Menu menu;
             try {
-                menu = new JF_Menu();
-                menu.show(true); 
+                JF_Menu menu = new JF_Menu();
+                menu.show(true);
+                
+                this.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(JF_Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-                                
-            dispose();
         } else {
         JOptionPane.showMessageDialog(null, 
                 "Login ou Senha Invalido!", "Mensagem",ERROR_MESSAGE);

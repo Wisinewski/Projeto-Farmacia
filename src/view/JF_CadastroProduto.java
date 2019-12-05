@@ -245,10 +245,11 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
             int qtd = (Integer) qtd_produto.getValue();
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date date = formato.parse(txt_vencimento.getText());
+           
             //pegando a categoria para realizar pesquisa no Banco
             objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
             // Passando os parametros para a classe Produto
-            Produto produto = new Produto(id, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), (Date)date, txt_lote.getText(), receita, qtd, objCategoria.getId());
+            Produto produto = new Produto(id, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), date, txt_lote.getText(), receita, qtd, objCategoria.getId());
             System.out.println(produto);
             ProdutoController cadastroProduto = new ProdutoController();
             cadastroProduto.insert(produto);
