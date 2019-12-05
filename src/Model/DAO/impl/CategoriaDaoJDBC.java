@@ -63,26 +63,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 	}
 
 	@Override
-	public void update(Categoria categoria) {
-		PreparedStatement st = null;
-		try {
-			st = conexao.prepareStatement(
-					"UPDATE Categoria "
-					+ "SET nome = ? "
-					+ "WHERE idcategoria = ?");
-			
-			st.setString(1, categoria.getNome());
-			st.setInt(2, categoria.getId());
-			
-			st.executeUpdate();
-		}
-		catch(SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Integer id) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement("DELETE FROM Categoria WHERE idcategoria = ?");
@@ -98,7 +79,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 	}
 
 	@Override
-	public Categoria findById(Long id) {
+	public Categoria findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {

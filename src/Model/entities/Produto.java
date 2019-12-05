@@ -1,31 +1,48 @@
 
 package model.entities;
 
+import controller.CategoriaController;
+import java.util.Date;
+
 
 public class Produto {
     private Integer idproduto;
     private String nome;
     private Double preco;
-    private Integer qtd;
-    private String validade;
+    private Date vencimento;
     private String lote;
     private int prescricao;
+    private Integer qtd;
+    
     private Categoria categoria;
+    
+    CategoriaController cc = new CategoriaController();
     
     public Produto() {
     }
-    
-    public Produto(Integer idproduto,String nome, Double preco, Integer qtd, String validade, String lote, int prescricao, Categoria categoria) {
+
+    public Produto(Integer idproduto, String nome, Double preco, Date vencimento, String lote, int prescricao, Integer qtd, Integer idcategoria) {
         this.idproduto = idproduto;
         this.nome = nome;
         this.preco = preco;
-        this.qtd = qtd;
-        this.validade = validade;
+        this.vencimento = vencimento;
         this.lote = lote;
         this.prescricao = prescricao;
-        this.categoria = categoria;
+        this.qtd = qtd;
+        this.categoria = cc.findById(idcategoria);
     }
 
+    public Produto(Object object, String text, double parseDouble, String date, String text0, int receita, int qtd, Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Integer getId() {
+        return this.idproduto;
+    }
+    
+    public void setId(Integer idproduto) {
+        this.idproduto = idproduto;
+    }
     public String getNome() {
         return nome;
     }
@@ -41,6 +58,14 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+    
+    public Date getVencimento() {
+        return this.vencimento;
+    }
+    
+    public void setVencimento(Date vencimento) {
+        this.vencimento = vencimento;
+    }
 
     public Integer getQtd() {
         return qtd;
@@ -48,14 +73,6 @@ public class Produto {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
-    }
-
-    public String getValidade() {
-        return validade;
-    }
-
-    public void setValidade(String validade) {
-        this.validade = validade;
     }
 
     public String getLote() {
@@ -85,7 +102,7 @@ public class Produto {
 	@Override
 	public String toString() {
 		return "Produto [idproduto=" + idproduto + ", nome=" + nome + ", preco=" + preco + ", qtd=" + qtd
-				+ ", validade=" + validade + ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
+				+ ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
 				+ categoria + "]";
 	}
    

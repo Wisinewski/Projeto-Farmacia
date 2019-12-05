@@ -16,7 +16,8 @@ public class DB {
                 Class.forName("org.sqlite.JDBC");
             //  String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Documents/prj_Farmacia/pharma.db";
                // String url = "jdbc:sqlite:C:/Users/wisinewski/Desktop/projetin/Projeto-Farmacia/pharma.db";
-                  String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Desktop/Projeto-Farmacia/pharma.db";
+               // String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.002/Desktop/Projeto-Farmacia/pharma.db";
+                  String url = "jdbc:sqlite:C:/Users/TEMP.FATECRL.003/Documents/NetBeansProjects/Projeto-Farmacia/pharma.db";
                 conexao = DriverManager.getConnection(url);
                 System.out.println("Banco Conectado!");
             } catch (Exception erro) {

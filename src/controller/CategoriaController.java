@@ -17,15 +17,11 @@ public class CategoriaController {
         categoriaDao.insert(categoria);
     }
     
-    public void update(Categoria categoria) {
-    	categoriaDao.update(categoria);
-    }
-    
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
     	categoriaDao.deleteById(id);
     }
     
-    public Categoria findById(Long id) {
+    public Categoria findById(Integer id) {
     	return categoriaDao.findById(id);
     }
     

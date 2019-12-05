@@ -7,8 +7,7 @@ import model.entities.Categoria;
 public interface CategoriaDao {
 	
 	void insert(Categoria categoria);
-	void update(Categoria categoria);
-	void deleteById(Long id);
-	Categoria findById(Long id);
+	void deleteById(Integer id);
+	Categoria findById(Integer id);
 	List<Categoria> findAll();
 }
