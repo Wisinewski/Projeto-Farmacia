@@ -7,7 +7,9 @@ import controller.ProdutoController;
 import db.DB;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,7 +33,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             insert = conexao.prepareStatement(conteudo);
             insert.setString(1, produto.getNome());
             insert.setDouble(2, produto.getPreco());
-            insert.setString(3, produto.getValidade());
+            insert.setDate(3, (Date) produto.getVencimento());
             insert.setString(4, produto.getLote());
             insert.setInt(5, produto.getPrescricao());
             insert.setInt(6, produto.getQtd());
@@ -54,20 +56,70 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
     @Override
     public void update(Produto produto) {
-        // TODO Auto-generated method stub
+        PreparedStatement st = null;
+        try {
+            st = conexao.prepareStatement(
+                    "UPDATE Categoria "
+                    + "SET nome = ? "
+                    + "SET preco = ? "
+                    + "SET vencimento = ? "
+                    + "SET lote = ? "
+                    + "SET prescmedica = ? "
+                    + "SET qtd = ? "
+                    + "SET idcategoria = ? "
+                    + "WHERE idcategoria = ?");
 
+            st.setString(1, produto.getNome());
+            st.setInt(2, produto.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteById(Long id) {
-        // TODO Auto-generated method stub
+    public void deleteById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            st = conexao.prepareStatement("DELETE FROM Produto WHERE idproduto = ?");
 
+            st.setLong(1, id);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
-    public Produto findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Produto findById(Integer id) {
+        PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conexao.prepareStatement(
+					"SELECT * FROM Produto WHERE idproduto = ?");
+			
+			st.setLong(1, id);
+			
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Produto produto = new Produto(rs.getInt("idproduto"), 
+                                                              rs.getString("nome"),
+                                                              rs.getDouble("preco"),
+                                                              rs.getDate("vecimento"),
+                                                              rs.getString("lote"),
+                                                              rs.getInt("prescmedica"),
+                                                              rs.getInt("qtd"),
+                                                              rs.getInt("idcategoria"));
+				return produto;
+			}
+			return null;
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
     }
 
     @Override

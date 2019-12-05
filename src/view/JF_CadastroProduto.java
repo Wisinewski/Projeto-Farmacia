@@ -240,16 +240,21 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
-
-        int qtd = (Integer) qtd_produto.getValue();
-        String date = transformarData(txt_vencimento.getText()).toString();
-        //pegando a categoria para realizar pesquisa no Banco
-        objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
-        // Passando os parametros para a classe Produto
-        Produto produto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, date, txt_lote.getText(), receita, objCategoria);
-        System.out.println(produto);
-        ProdutoController cadastroProduto = new ProdutoController();
-        cadastroProduto.insert(produto);
+        try {
+            Integer id = null;
+            int qtd = (Integer) qtd_produto.getValue();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = formato.parse(txt_vencimento.getText());
+            //pegando a categoria para realizar pesquisa no Banco
+            objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
+            // Passando os parametros para a classe Produto
+            Produto produto = new Produto(id, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), (Date)date, txt_lote.getText(), receita, qtd, objCategoria.getId());
+            System.out.println(produto);
+            ProdutoController cadastroProduto = new ProdutoController();
+            cadastroProduto.insert(produto);
+        } catch (ParseException ex) {
+            Logger.getLogger(JF_CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 

@@ -21,11 +21,11 @@ public class ProdutoController {
     	produtoDao.update(produto);
     }
     
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
     	produtoDao.deleteById(id);
     }
     
-    public Produto findById(Long id) {
+    public Produto findById(Integer id) {
     	return produtoDao.findById(id);
     }
   
