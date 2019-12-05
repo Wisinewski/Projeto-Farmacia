@@ -64,19 +64,59 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 
 	@Override
 	public void update(Categoria categoria) {
-		// TODO Auto-generated method stub
-
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement(
+					"UPDATE Categoria "
+					+ "SET nome = ? "
+					+ "WHERE idcategoria = ?");
+			
+			st.setString(1, categoria.getNome());
+			st.setInt(2, categoria.getId());
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement("DELETE FROM Categoria WHERE idcategoria = ?");
+			
+			st.setLong(1, id);
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
 	@Override
 	public Categoria findById(Long id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conexao.prepareStatement(
+					"SELECT * FROM Categoria WHERE idcategoria = ?");
+			
+			st.setLong(1, id);
+			
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Categoria categoria = new Categoria(rs.getInt("idcategoria"), rs.getString("nome"));
+				return categoria;
+			}
+			return null;
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 
