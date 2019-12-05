@@ -6,6 +6,7 @@
 package view;
 
 
+import com.sun.xml.internal.ws.streaming.XMLStreamReaderUtil;
 import controller.LoginController;
 import model.entities.Login;
 
@@ -141,7 +142,7 @@ public class JF_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
-          
+        
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed

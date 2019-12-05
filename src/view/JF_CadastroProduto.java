@@ -10,10 +10,12 @@ import model.entities.Produto;
 import controller.CategoriaController;
 import controller.ProdutoController;
 
-import java.awt.event.ItemListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +27,7 @@ import java.util.logging.Logger;
 public class JF_CadastroProduto extends javax.swing.JFrame {
 
     int receita = 0;
-  
+
     CategoriaController categoria = new CategoriaController();
     Categoria objCategoria = new Categoria();
     // Preenche a lista com a lista de categoria do banco de dados
@@ -55,7 +57,7 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         btn_cancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btn_receita = new javax.swing.JRadioButton();
+        rb_receita = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         txt_preco = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -99,10 +101,10 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Vencimento");
 
-        btn_receita.setText("Prescrição Medica");
-        btn_receita.addActionListener(new java.awt.event.ActionListener() {
+        rb_receita.setText("Prescrição Medica");
+        rb_receita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_receitaActionPerformed(evt);
+                rb_receitaActionPerformed(evt);
             }
         });
 
@@ -155,78 +157,69 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel2)
-                .addGap(90, 90, 90)
-                .addComponent(txt_nmProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel5)
-                .addGap(107, 107, 107)
-                .addComponent(txt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4)
-                .addGap(65, 65, 65)
-                .addComponent(txt_vencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
-                .addGap(99, 99, 99)
-                .addComponent(txt_lote, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel6)
-                .addGap(102, 102, 102)
-                .addComponent(qtd_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_receita))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7)
-                .addGap(73, 73, 73)
-                .addComponent(cmb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(btn_cancelar)
-                .addGap(25, 25, 25)
-                .addComponent(btn_cadastrar))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_cancelar)
+                        .addGap(45, 45, 45)
+                        .addComponent(btn_cadastrar))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(qtd_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rb_receita))
+                            .addComponent(txt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_vencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_nmProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_lote, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_nmProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_vencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(qtd_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_receita))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rb_receita)
+                        .addComponent(qtd_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cmb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
                     .addComponent(btn_cadastrar))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,12 +228,11 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
 
         int qtd = (Integer) qtd_produto.getValue();
-  
-        
+        String date = transformarData(txt_vencimento.getText()).toString();
         //pegando a categoria para realizar pesquisa no Banco
-        objCategoria = ProcurarCategoria(cmb_categoria .getSelectedItem().toString());
+        objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
         // Passando os parametros para a classe Produto
-        Produto produto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, txt_vencimento.getText(), txt_lote.getText(), receita, objCategoria);
+        Produto produto = new Produto(null, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), qtd, date, txt_lote.getText(), receita, objCategoria);
         System.out.println(produto);
         ProdutoController cadastroProduto = new ProdutoController();
         cadastroProduto.insert(produto);
@@ -248,19 +240,19 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-
+        limpar();
 
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_receitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_receitaActionPerformed
+    private void rb_receitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_receitaActionPerformed
 
-        if (btn_receita.isSelected()) {
+        if (rb_receita.isSelected()) {
             receita = 1;
         } else {
             receita = 0;
         }
 
-    }//GEN-LAST:event_btn_receitaActionPerformed
+    }//GEN-LAST:event_rb_receitaActionPerformed
 
     private void cmb_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_categoriaActionPerformed
 
@@ -309,7 +301,6 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadastrar;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JRadioButton btn_receita;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cmb_categoria;
     private javax.swing.JLabel jLabel1;
@@ -321,6 +312,7 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner qtd_produto;
+    private javax.swing.JRadioButton rb_receita;
     private javax.swing.JTextField txt_lote;
     private javax.swing.JTextField txt_nmProduto;
     private javax.swing.JTextField txt_preco;
@@ -334,22 +326,33 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         }
     }
 
-    private Categoria ProcurarCategoria(String categ_selecionada) {
-
+    private Categoria procurarCategoria(String categ_selecionada) {
         try {
-
             for (Categoria c : lst_categoria) {
                 if (c.getNome().equals(categ_selecionada)) {
                     System.out.println("" + c.getNome());
                     return c;
-                  
                 }
-
             }
-            
         } catch (Exception e) {
         }
         return null;
+    }
+
+    private LocalDate transformarData(String campodata) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(campodata, formato);
+        return data;
+    }
+
+    private void limpar() {
+        txt_lote.setText("");
+        txt_nmProduto.setText("");
+        txt_preco.setText("");
+        txt_vencimento.setText("");
+        cmb_categoria.setSelectedIndex(0);
+        rb_receita.setSelected(false);
+        qtd_produto.setValue(0);
     }
 
 }
