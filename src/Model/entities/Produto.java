@@ -9,7 +9,7 @@ public class Produto {
     private Integer idproduto;
     private String nome;
     private Double preco;
-    private Date vencimento;
+    private String vencimento;
     private String lote;
     private int prescricao;
     private Integer qtd;
@@ -21,7 +21,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(Integer idproduto, String nome, Double preco, Date vencimento, String lote, int prescricao, Integer qtd, Integer idcategoria) {
+    public Produto(Integer idproduto, String nome, Double preco, String vencimento, String lote, int prescricao, Integer qtd, Integer idcategoria) {
         this.idproduto = idproduto;
         this.nome = nome;
         this.preco = preco;
@@ -32,11 +32,11 @@ public class Produto {
         this.categoria = cc.findById(idcategoria);
     }
 
-    public Produto(Object object, String text, double parseDouble, String date, String text0, int receita, int qtd, Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Produto(Object object, String string, double d, Date date, int i, int j, int k, int l) {
+		// TODO Auto-generated constructor stub
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return this.idproduto;
     }
     
@@ -59,11 +59,11 @@ public class Produto {
         this.preco = preco;
     }
     
-    public Date getVencimento() {
+    public String getVencimento() {
         return this.vencimento;
     }
     
-    public void setVencimento(Date vencimento) {
+    public void setVencimento(String vencimento) {
         this.vencimento = vencimento;
     }
 
@@ -102,7 +102,7 @@ public class Produto {
 	@Override
 	public String toString() {
 		return "Produto [idproduto=" + idproduto + ", nome=" + nome + ", preco=" + preco + ", qtd=" + qtd
-				+ ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
+				+ ", data=" + vencimento + ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
 				+ categoria + "]";
 	}
    

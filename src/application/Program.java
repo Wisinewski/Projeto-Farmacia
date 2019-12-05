@@ -6,15 +6,19 @@
 package application;
 
 
-import model.dao.impl.LoginDaoJDBC;
-import model.entities.Categoria;
-import controller.CategoriaController;
-
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
+import db.DB;
+import model.dao.CategoriaDao;
+import model.dao.ProdutoDao;
+import model.dao.impl.CategoriaDaoJDBC;
+import model.dao.impl.ProdutoDaoJDBC;
+import model.entities.Categoria;
+import model.entities.Produto;
 
 /**
  *
@@ -24,27 +28,38 @@ public class Program {
 
     /**
      * @param args the command line arguments
+     * @throws ParseException 
      */
-    public static void main(String[] args) throws SQLException  {
+    public static void main(String[] args) throws SQLException, ParseException  {
  
-        
-        
-        /*     
-        LoginDAO incluir;
-        
-        incluir = new LoginDAO();
-        try{
-            if(incluir.Incluir("Ju","palmeiras"))
-            {
-                 System.out.println("Cadastrado");
-        
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        */
+    	// OPERACOES CATEGORIA
+    	/*
+    	CategoriaDao categoriaDao = new CategoriaDaoJDBC(DB.getConnection());
+    	categoriaDao.insert(new Categoria(null, "Quimicos"));
+    	
+    	System.out.println(categoriaDao.findById(1));
+    	
+    	categoriaDao.deleteById(32);
+    	
+    	List<Categoria> listaCategorias = categoriaDao.findAll();
+    	listaCategorias.stream().forEach(System.out::println);
+    	*/
+    	//
+    	
+    	// OPERACOES PRODUTO
+    	/*
+    	ProdutoDao produtoDao = new ProdutoDaoJDBC(DB.getConnection());
+    	
+    	produtoDao.insert(new Produto(null, "Salgadinho", 5.0, "30-05-2020", "123", 0, 400, 2));
+    	
+    	System.out.println(produtoDao.findById(1));
+    	
+    	produtoDao.deleteById(1);
+    	
+    	List<Produto> listaProdutos = produtoDao.findAll();
+    	listaProdutos.stream().forEach(System.out::println);
+    	*/
+    	//
         
     }
     

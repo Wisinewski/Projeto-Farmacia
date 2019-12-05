@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +34,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             insert = conexao.prepareStatement(conteudo);
             insert.setString(1, produto.getNome());
             insert.setDouble(2, produto.getPreco());
-            insert.setDate(3, (Date) produto.getVencimento());
+            insert.setString(3, produto.getVencimento());
             insert.setString(4, produto.getLote());
             insert.setInt(5, produto.getPrescricao());
             insert.setInt(6, produto.getQtd());
@@ -107,7 +108,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 				Produto produto = new Produto(rs.getInt("idproduto"), 
                                                               rs.getString("nome"),
                                                               rs.getDouble("preco"),
-                                                              rs.getDate("vecimento"),
+                                                              rs.getString("vencimento"),
                                                               rs.getString("lote"),
                                                               rs.getInt("prescmedica"),
                                                               rs.getInt("qtd"),
@@ -124,8 +125,32 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
     @Override
     public List<Produto> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+    	List<Produto> lst_produto = new ArrayList<>();
+		try {
+		PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto ");
+		
+		
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+
+			Produto produto = new Produto(rs.getInt("idcategoria"), 
+										  rs.getString("nome"),
+										  rs.getDouble("preco"),
+										  rs.getString("vencimento"),
+										  rs.getString("lote"),
+										  rs.getInt("prescmedica"),
+										  rs.getInt("qtd"),
+										  rs.getInt("idcategoria"));
+			lst_produto.add(produto);
+		}
+		pstmt.close();
+		
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return lst_produto;
     }
 
 }
