@@ -16,6 +16,7 @@ public class JF_Pedido extends javax.swing.JFrame {
      */
     public JF_Pedido() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

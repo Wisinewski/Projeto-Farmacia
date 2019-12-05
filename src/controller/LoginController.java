@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.sql.SQLException;
@@ -8,19 +7,19 @@ import model.dao.LoginDao;
 import model.entities.Login;
 
 public class LoginController {
-	private LoginDao loginDao = DaoFactory.createLoginDao();
 
-	public LoginController() {
-	}
+    private LoginDao loginDao = DaoFactory.createLoginDao();
 
-	public boolean verify(Login login) {
-		boolean a;
+    public LoginController() {
+    }
 
-		a = loginDao.verify(login);
+    public boolean verify(Login login) {
+        boolean a;
 
-		System.out.println("" + a);
-		return false;
+        a = loginDao.verify(login);
 
-	}
+        return a;
+
+    }
 
 }
