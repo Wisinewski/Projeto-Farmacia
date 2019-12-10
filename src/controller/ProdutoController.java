@@ -12,17 +12,20 @@ public class ProdutoController {
     public ProdutoController() {
     }
     
-    public void insert(Produto produto) {
+    
+    public boolean insert(Produto produto) {
         
-    	produtoDao.insert(produto); 
+    	boolean cadastrar = produtoDao.insert(produto); 
+        return cadastrar;
     }
     
     public void update(Produto produto) {
     	produtoDao.update(produto);
     }
     
-    public void deleteById(Integer id) {
-    	produtoDao.deleteById(id);
+    public boolean deleteById(Integer id) {
+    	boolean t = produtoDao.deleteById(id);
+        return t;
     }
     
     public Produto findById(Integer id) {
@@ -33,5 +36,15 @@ public class ProdutoController {
     	List<Produto> listaProdutos = produtoDao.findAll();
     	return listaProdutos;
     }
+    public List<Produto> findbyWord(String desc)
+    {
+        List<Produto> listaProdutos = produtoDao.findByWord(desc);
+    	return listaProdutos;
+    }
+  
+    
+    
+     
+    
 
 }

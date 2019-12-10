@@ -3,23 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_Pedido.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/CategoriaDao.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/controller/CategoriaController.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/LoginDao.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/ProdutoItemDao.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/ProdutoDao.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/impl/ProdutoDaoJDBC.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_CadastroProduto.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/controller/ProdutoController.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/impl/ProdutoItemDaoJDBC.java</file>
             <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/db/DB.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/DaoFactory.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_Categoria.java</file>
+            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/impl/ProdutoDaoJDBC.java</file>
+            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/controller/ProdutoController.java</file>
+            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_Home.java</file>
             <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_Login.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/controller/PedidoController.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/Model/DAO/PedidoDao.java</file>
-            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/controller/LoginController.java</file>
+            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/view/JF_Menu.java</file>
+            <file>file:/C:/Users/Morais/Documents/NetBeansProjects/Projeto-Farmacia/src/application/Program.java</file>
         </group>
     </open-files>
 </project-private>

@@ -48,19 +48,30 @@ public class Program {
     	
     	
     	// OPERACOES PRODUTO
-    	/*
+    /*
     	ProdutoDao produtoDao = new ProdutoDaoJDBC(DB.getConnection());
     	
     	produtoDao.insert(new Produto(null, "Salgadinho", 5.0, "30-05-2020", "123", 0, 400, 2));
     	
-    	System.out.println(produtoDao.findById(1));
+    	System.out.println("teste"+produtoDao.findById(2));
     	
     	produtoDao.deleteById(1);
     	
     	List<Produto> listaProdutos = produtoDao.findAll();
     	listaProdutos.stream().forEach(System.out::println);
-    	*/
-    	//
+      */
+    
+    
+    // OPERACAO PRODUTO PESQUISA POR NOME
+    
+    	ProdutoDao produtoDao = new ProdutoDaoJDBC(DB.getConnection());
+ 
+    	
+   
+    	String desc = "Mateus";
+    	List<Produto> listaProdutos = produtoDao.findByWord(desc);
+    	listaProdutos.stream().forEach(System.out::println);
+      
         
     }
     

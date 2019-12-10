@@ -13,8 +13,10 @@ public class CategoriaController {
 	public CategoriaController() {
 	}
   
-    public void insert(Categoria categoria) {
-        categoriaDao.insert(categoria);
+    public boolean insert(Categoria categoria) {
+      boolean inserir =  categoriaDao.insert(categoria);
+        
+        return inserir;
     }
     
     public void deleteById(Integer id) {

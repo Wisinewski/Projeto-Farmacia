@@ -1,14 +1,17 @@
 package model.dao;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import model.entities.Produto;
 
 public interface ProdutoDao {
 	
-	void insert(Produto produto);
+	boolean insert(Produto produto);
 	void update(Produto produto);
-	void deleteById(Integer id);
+	boolean deleteById(Integer id);
 	Produto findById(Integer id);
 	List<Produto> findAll();
+        List<Produto> findByWord(String desc);
+    
 }
