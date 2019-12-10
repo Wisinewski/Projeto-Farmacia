@@ -6,7 +6,7 @@ import model.entities.Categoria;
 
 public interface CategoriaDao {
 	
-	void insert(Categoria categoria);
+	boolean insert(Categoria categoria);
 	void deleteById(Integer id);
 	Categoria findById(Integer id);
 	List<Categoria> findAll();

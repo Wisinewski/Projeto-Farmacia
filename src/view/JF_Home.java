@@ -1,6 +1,7 @@
 package view;
 
 import com.sun.media.sound.ModelOscillator;
+import controller.ProdutoController;
 import db.DB;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,7 +20,7 @@ import model.entities.Produto;
 
 public class JF_Home extends javax.swing.JFrame {
 
-    ProdutoDao produtoDao;
+    ProdutoController produtoController;
     DefaultTableModel modelo;
     List<Produto> ls_produto;
     JF_Menu menu;
@@ -28,7 +29,8 @@ public class JF_Home extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         menu = new JF_Menu();
-        produtoDao = new ProdutoDaoJDBC(DB.getConnection());
+
+        produtoController = new ProdutoController();
         menu.setVisible(false);
         modelo = (DefaultTableModel) Jt_Produto.getModel();
         ReadJtable();
@@ -47,6 +49,7 @@ public class JF_Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_voltar = new javax.swing.JToggleButton();
         btn_excluir = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,26 +104,35 @@ public class JF_Home extends javax.swing.JFrame {
             }
         });
 
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
+                        .addGap(29, 29, 29)
                         .addComponent(btn_excluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +145,8 @@ public class JF_Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_excluir))
+                    .addComponent(btn_excluir)
+                    .addComponent(btn_editar))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
@@ -161,15 +174,29 @@ public class JF_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nomeKeyPressed
 
     private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
-        this.setVisible(false);
+        this.dispose();
+    
         menu.setVisible(true);
     }//GEN-LAST:event_btn_voltarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         DeleteRow();
-
-
     }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        Integer id_produto = (Integer) Jt_Produto.getValueAt(Jt_Produto.getSelectedRow(), 0);
+        String nome_categoria = ""+Jt_Produto.getValueAt(Jt_Produto.getSelectedRow(), 7);
+        JF_EditarProduto editar;
+        try {
+            editar = new JF_EditarProduto(id_produto,nome_categoria);
+            editar.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(JF_Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btn_editarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -210,6 +237,7 @@ public class JF_Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Jt_Produto;
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JToggleButton btn_voltar;
     private javax.swing.JLabel jLabel1;
@@ -222,7 +250,8 @@ public class JF_Home extends javax.swing.JFrame {
     private void ReadJtable() {
 
         modelo.setNumRows(0);
-        for (Produto p : produtoDao.findAll()) {
+        for (Produto p : produtoController.findAll()) {
+            System.out.println("" + p);
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -231,7 +260,8 @@ public class JF_Home extends javax.swing.JFrame {
                 p.getLote(),
                 p.toBooleanPrescricao(),
                 p.getQtd(),
-                p.getQtd(),});
+                p.getCategoria().getNome()
+            });
 
         }
 
@@ -241,7 +271,7 @@ public class JF_Home extends javax.swing.JFrame {
 
         modelo.setNumRows(0);
 
-        for (Produto p : produtoDao.findByWord(desc)) {
+        for (Produto p : produtoController.findbyWord(desc)) {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -250,24 +280,25 @@ public class JF_Home extends javax.swing.JFrame {
                 p.getLote(),
                 p.toBooleanPrescricao(),
                 p.getQtd(),
-                p.getQtd(),});
+                p.getCategoria().getNome()
+            });
 
         }
 
     }
 
     private void DeleteRow() {
-        ls_produto = produtoDao.findAll();
+        ls_produto = produtoController.findAll();
 
-        int f = (int) Jt_Produto.getValueAt(Jt_Produto.getSelectedRow(), 0);
-        if (produtoDao.deleteById(f)) {
+        Integer f = (Integer) Jt_Produto.getValueAt(Jt_Produto.getSelectedRow(), 0);
+        if (produtoController.deleteById(f)) {
             JOptionPane.showMessageDialog(null,
                     "Produto Deletado!!", "Mensagem", WIDTH);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Erro ao Deletar o Produto!!", "Mensagem", ERROR_MESSAGE);
         }
-    ReadJtable();
+        ReadJtable();
     }
 
 }

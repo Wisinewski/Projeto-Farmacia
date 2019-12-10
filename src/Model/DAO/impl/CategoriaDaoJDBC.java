@@ -18,7 +18,7 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 		this.conexao = conexao;
 	}
 
-	public void insert(Categoria categoria){
+	public boolean insert(Categoria categoria){
     	
         PreparedStatement insert;
         try {
@@ -32,12 +32,16 @@ public class CategoriaDaoJDBC implements CategoriaDao {
 	        
 	        if(registro == 1)
 	        {
-	            System.out.println("Inserido!");        
+	            System.out.println("Inserido!");  
+                    return true;
+                 
 	        }    
         }
         catch(SQLException e) {
         	System.out.println(e.getMessage());
+               
         }
+        return false;
     }
 
 	public List<Categoria> findAll() {

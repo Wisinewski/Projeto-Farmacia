@@ -25,7 +25,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public void insert(Produto produto) {
+    public boolean insert(Produto produto) {
 
         PreparedStatement insert;
 
@@ -45,14 +45,16 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
             if (registro == 1) {
                 System.out.println("Inserido!");
+                return true;
 
             } else {
                 System.out.println("Erro ao Inserir!");
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+return false;
     }
 
     @Override

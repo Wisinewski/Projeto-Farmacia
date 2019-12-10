@@ -10,6 +10,7 @@ import controller.CategoriaController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
@@ -72,6 +73,8 @@ public class JF_Categoria extends javax.swing.JFrame {
         jLabel4.setText("Categoria");
 
         btn_voltar.setText("Voltar");
+        btn_voltar.setMaximumSize(new java.awt.Dimension(289, 233));
+        btn_voltar.setMinimumSize(new java.awt.Dimension(289, 233));
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_voltarActionPerformed(evt);
@@ -96,7 +99,7 @@ public class JF_Categoria extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_voltar)
+                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -144,7 +147,16 @@ public class JF_Categoria extends javax.swing.JFrame {
         Categoria categoria =  new Categoria(null,txt_categoria.getText());
      
         CategoriaController catController = new CategoriaController();
-		catController.insert(categoria);
+		if(catController.insert(categoria))
+                {
+                  JOptionPane.showMessageDialog(null,"Categoria Cadastrada!!","Cadastro", JOptionPane.INFORMATION_MESSAGE);  
+                    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Erro ao Cadastrar!!","Cadastro", JOptionPane.ERROR);
+                }
+                
         
     }//GEN-LAST:event_btn_CadastrarActionPerformed
 
