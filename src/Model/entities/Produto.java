@@ -1,11 +1,10 @@
-
 package model.entities;
 
 import controller.CategoriaController;
 import java.util.Date;
 
-
 public class Produto {
+
     private Integer idproduto;
     private String nome;
     private Double preco;
@@ -13,11 +12,10 @@ public class Produto {
     private String lote;
     private int prescricao;
     private Integer qtd;
-    
     private Categoria categoria;
-    
+
     CategoriaController cc = new CategoriaController();
-    
+
     public Produto() {
     }
 
@@ -33,16 +31,17 @@ public class Produto {
     }
 
     public Produto(Object object, String string, double d, Date date, int i, int j, int k, int l) {
-		// TODO Auto-generated constructor stub
-	}
+        // TODO Auto-generated constructor stub
+    }
 
-	public Integer getId() {
+    public Integer getId() {
         return this.idproduto;
     }
-    
+
     public void setId(Integer idproduto) {
         this.idproduto = idproduto;
     }
+
     public String getNome() {
         return nome;
     }
@@ -58,11 +57,11 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
-    
+
     public String getVencimento() {
         return this.vencimento;
     }
-    
+
     public void setVencimento(String vencimento) {
         this.vencimento = vencimento;
     }
@@ -85,12 +84,21 @@ public class Produto {
 
     public int getPrescricao() {
         return prescricao;
+
+    }
+
+    public boolean toBooleanPrescricao() {
+        if (prescricao == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setPrescricao(int prescricao) {
         this.prescricao = prescricao;
     }
-  
+
     public Categoria getCategoria() {
         return categoria;
     }
@@ -99,11 +107,11 @@ public class Produto {
         this.categoria = categoria;
     }
 
-	@Override
-	public String toString() {
-		return "Produto [idproduto=" + idproduto + ", nome=" + nome + ", preco=" + preco + ", qtd=" + qtd
-				+ ", data=" + vencimento + ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
-				+ categoria + "]";
-	}
-   
+    @Override
+    public String toString() {
+        return "Produto [idproduto=" + idproduto + ", nome=" + nome + ", preco=" + preco + ", qtd=" + qtd
+                + ", data=" + vencimento + ", lote=" + lote + ", prescricao=" + prescricao + ", categoria="
+                + categoria + "]";
+    }
+
 }

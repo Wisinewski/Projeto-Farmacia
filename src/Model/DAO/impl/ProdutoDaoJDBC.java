@@ -80,7 +80,7 @@ public class ProdutoDaoJDBC implements ProdutoDao {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         PreparedStatement st = null;
         try {
             st = conexao.prepareStatement("DELETE FROM Produto WHERE idproduto = ?");
@@ -88,69 +88,105 @@ public class ProdutoDaoJDBC implements ProdutoDao {
             st.setLong(1, id);
 
             st.executeUpdate();
+            return true;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        
     }
 
     @Override
     public Produto findById(Integer id) {
         PreparedStatement st = null;
-		ResultSet rs = null;
-		try {
-			st = conexao.prepareStatement(
-					"SELECT * FROM Produto WHERE idproduto = ?");
-			
-			st.setLong(1, id);
-			
-			rs = st.executeQuery();
-			if(rs.next()) {
-				Produto produto = new Produto(rs.getInt("idproduto"), 
-                                                              rs.getString("nome"),
-                                                              rs.getDouble("preco"),
-                                                              rs.getString("vencimento"),
-                                                              rs.getString("lote"),
-                                                              rs.getInt("prescmedica"),
-                                                              rs.getInt("qtd"),
-                                                              rs.getInt("idcategoria"));
-				return produto;
-			}
-			return null;
-		}
-		catch(SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
+        ResultSet rs = null;
+        try {
+            st = conexao.prepareStatement(
+                    "SELECT * FROM Produto WHERE idproduto = ?");
+
+            st.setLong(1, id);
+
+            rs = st.executeQuery();
+            if (rs.next()) {
+                Produto produto = new Produto(rs.getInt("idproduto"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco"),
+                        rs.getString("vencimento"),
+                        rs.getString("lote"),
+                        rs.getInt("prescmedica"),
+                        rs.getInt("qtd"),
+                        rs.getInt("idcategoria"));
+                return produto;
+            }
+            return null;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @Override
     public List<Produto> findAll() {
-    	List<Produto> lst_produto = new ArrayList<>();
-		try {
-		PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto ");
-		
-		
-		ResultSet rs = pstmt.executeQuery();
+        List<Produto> lst_produto = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto ");
 
-		while (rs.next()) {
+            ResultSet rs = pstmt.executeQuery();
 
-			Produto produto = new Produto(rs.getInt("idcategoria"), 
-										  rs.getString("nome"),
-										  rs.getDouble("preco"),
-										  rs.getString("vencimento"),
-										  rs.getString("lote"),
-										  rs.getInt("prescmedica"),
-										  rs.getInt("qtd"),
-										  rs.getInt("idcategoria"));
-			lst_produto.add(produto);
-		}
-		pstmt.close();
-		
-		}
-		catch(SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return lst_produto;
+            while (rs.next()) {
+
+                Produto produto = new Produto(rs.getInt("idproduto"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco"),
+                        rs.getString("vencimento"),
+                        rs.getString("lote"),
+                        rs.getInt("prescmedica"),
+                        rs.getInt("qtd"),
+                        rs.getInt("idcategoria"));
+                lst_produto.add(produto);
+            }
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lst_produto;
     }
+
+    @Override
+    public List<Produto> findByWord(String desc) {
+
+        List<Produto> lst_produto = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto WHERE nome LIKE ?");
+            pstmt.setString(1, "%" + desc + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                Produto produto = new Produto(rs.getInt("idproduto"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco"),
+                        rs.getString("vencimento"),
+                        rs.getString("lote"),
+                        rs.getInt("prescmedica"),
+                        rs.getInt("qtd"),
+                        rs.getInt("idcategoria"));
+                lst_produto.add(produto);
+            }
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lst_produto;
+
+    }
+
+  
+
+  
 
 }
