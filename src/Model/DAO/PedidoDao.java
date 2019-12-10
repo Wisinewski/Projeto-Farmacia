@@ -6,9 +6,9 @@ import model.entities.Pedido;
 
 public interface PedidoDao {
 	
-	void insert(Pedido categoria);
+	boolean insert(Pedido categoria);
 	void update(Pedido categoria);
-	void deleteById(Long id);
-	Pedido findById(Long id);
+	boolean deleteById(Integer id);
+	Pedido findById(Integer id);
 	List<Pedido> findAll();
 }

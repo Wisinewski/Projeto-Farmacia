@@ -6,7 +6,6 @@ import model.entities.ProdutoItem;
 
 public interface ProdutoItemDao {
 	
-	void insert(ProdutoItem categoria);
-	ProdutoItem findById(Long id);
-	List<ProdutoItem> findAll();
+	boolean insert(ProdutoItem categoria);
+	List<ProdutoItem> findAllById(Integer id);
 }

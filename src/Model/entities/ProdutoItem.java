@@ -1,42 +1,53 @@
 package model.entities;
 
+import controller.ProdutoController;
+import db.DB;
+import model.dao.ProdutoDao;
+import model.dao.impl.ProdutoDaoJDBC;
+
 public class ProdutoItem {
-	private Long idpedido;
-	private Long idproduto;
-	private Long qtd;
+	private Integer idpedido;
+	private Integer idproduto;
+	private Integer qtd;
 	
 	public ProdutoItem() {
 	}
 
-	public ProdutoItem(Long idpedido, Long idproduto, Long qtd) {
+	public ProdutoItem(Integer idpedido, Integer idproduto, Integer qtd) {
 		super();
 		this.idpedido = idpedido;
 		this.idproduto = idproduto;
 		this.qtd = qtd;
 	}
 
-	public Long getIdpedido() {
+	public Integer getIdpedido() {
 		return idpedido;
 	}
 
-	public void setIdpedido(Long idpedido) {
+	public void setIdpedido(Integer idpedido) {
 		this.idpedido = idpedido;
 	}
 
-	public Long getIdproduto() {
+	public Integer getIdproduto() {
 		return idproduto;
 	}
 
-	public void setIdproduto(Long idproduto) {
+	public void setIdproduto(Integer idproduto) {
 		this.idproduto = idproduto;
 	}
 
-	public Long getQtd() {
+	public Integer getQtd() {
 		return qtd;
 	}
 
-	public void setQtd(Long qtd) {
+	public void setQtd(Integer qtd) {
 		this.qtd = qtd;
+	}
+	
+	public Double getPrecoProdutoItem() {
+		ProdutoController pc = new ProdutoController();
+		Produto produto = pc.findById(idproduto);
+		return this.qtd * produto.getPreco();
 	}
 
 	@Override

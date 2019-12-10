@@ -18,177 +18,150 @@ import java.util.logging.Logger;
 
 public class ProdutoDaoJDBC implements ProdutoDao {
 
-    private Connection conexao;
+	private Connection conexao;
 
-    public ProdutoDaoJDBC(Connection conexao) {
-        this.conexao = conexao;
-    }
+	public ProdutoDaoJDBC(Connection conexao) {
+		this.conexao = conexao;
+	}
 
-    @Override
-    public boolean insert(Produto produto) {
+	@Override
+	public boolean insert(Produto produto) {
 
-        PreparedStatement insert;
+		PreparedStatement insert;
 
-        String conteudo = " INSERT INTO Produto (nome,preco,vencimento,lote,prescmedica,qtd,idcategoria) VALUES (?,?,?,?,?,?,?)";
-        try {
-            insert = conexao.prepareStatement(conteudo);
-            insert.setString(1, produto.getNome());
-            insert.setDouble(2, produto.getPreco());
-            insert.setString(3, produto.getVencimento());
-            insert.setString(4, produto.getLote());
-            insert.setInt(5, produto.getPrescricao());
-            insert.setInt(6, produto.getQtd());
-            insert.setInt(7, produto.getCategoria().getId());
+		String conteudo = " INSERT INTO Produto (nome,preco,vencimento,lote,prescmedica,qtd,idcategoria) VALUES (?,?,?,?,?,?,?)";
+		try {
+			insert = conexao.prepareStatement(conteudo);
+			insert.setString(1, produto.getNome());
+			insert.setDouble(2, produto.getPreco());
+			insert.setString(3, produto.getVencimento());
+			insert.setString(4, produto.getLote());
+			insert.setInt(5, produto.getPrescricao());
+			insert.setInt(6, produto.getQtd());
+			insert.setInt(7, produto.getCategoria().getId());
 
-            int registro = insert.executeUpdate();
-            insert.close();
+			int registro = insert.executeUpdate();
+			insert.close();
 
-            if (registro == 1) {
-                System.out.println("Inserido!");
-                return true;
+			if (registro == 1) {
+				System.out.println("Inserido!");
+				return true;
 
-            } else {
-                System.out.println("Erro ao Inserir!");
-                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-return false;
-    }
+			} else {
+				System.out.println("Erro ao Inserir!");
 
-    @Override
-    public void update(Produto produto) {
-        PreparedStatement st = null;
-        try {
-            st = conexao.prepareStatement(
-                    "UPDATE Categoria "
-                    + "SET nome = ? "
-                    + "SET preco = ? "
-                    + "SET vencimento = ? "
-                    + "SET lote = ? "
-                    + "SET prescmedica = ? "
-                    + "SET qtd = ? "
-                    + "SET idcategoria = ? "
-                    + "WHERE idcategoria = ?");
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(ProdutoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return false;
+	}
 
-            st.setString(1, produto.getNome());
-            st.setInt(2, produto.getId());
+	@Override
+	public void update(Produto produto) {
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement("UPDATE Categoria " + "SET nome = ? " + "SET preco = ? "
+					+ "SET vencimento = ? " + "SET lote = ? " + "SET prescmedica = ? " + "SET qtd = ? "
+					+ "SET idcategoria = ? " + "WHERE idcategoria = ?");
 
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+			st.setString(1, produto.getNome());
+			st.setInt(2, produto.getId());
 
-    @Override
-    public boolean deleteById(Integer id) {
-        PreparedStatement st = null;
-        try {
-            st = conexao.prepareStatement("DELETE FROM Produto WHERE idproduto = ?");
+			st.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
-            st.setLong(1, id);
+	@Override
+	public boolean deleteById(Integer id) {
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement("DELETE FROM Produto WHERE idproduto = ?");
 
-            st.executeUpdate();
-            return true;
+			st.setLong(1, id);
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        
-    }
+			st.executeUpdate();
+			return true;
 
-    @Override
-    public Produto findById(Integer id) {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        try {
-            st = conexao.prepareStatement(
-                    "SELECT * FROM Produto WHERE idproduto = ?");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 
-            st.setLong(1, id);
+	}
 
-            rs = st.executeQuery();
-            if (rs.next()) {
-                Produto produto = new Produto(rs.getInt("idproduto"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco"),
-                        rs.getString("vencimento"),
-                        rs.getString("lote"),
-                        rs.getInt("prescmedica"),
-                        rs.getInt("qtd"),
-                        rs.getInt("idcategoria"));
-                return produto;
-            }
-            return null;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+	@Override
+	public Produto findById(Integer id) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conexao.prepareStatement("SELECT * FROM Produto WHERE idproduto = ?");
 
-    @Override
-    public List<Produto> findAll() {
-        List<Produto> lst_produto = new ArrayList<>();
-        try {
-            PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto ");
+			st.setLong(1, id);
 
-            ResultSet rs = pstmt.executeQuery();
+			rs = st.executeQuery();
+			if (rs.next()) {
+				Produto produto = new Produto(rs.getInt("idproduto"), rs.getString("nome"), rs.getDouble("preco"),
+						rs.getString("vencimento"), rs.getString("lote"), rs.getInt("prescmedica"), rs.getInt("qtd"),
+						rs.getInt("idcategoria"));
+				return produto;
+			}
+			return null;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
 
-            while (rs.next()) {
+	@Override
+	public List<Produto> findAll() {
+		List<Produto> lst_produto = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto ");
 
-                Produto produto = new Produto(rs.getInt("idproduto"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco"),
-                        rs.getString("vencimento"),
-                        rs.getString("lote"),
-                        rs.getInt("prescmedica"),
-                        rs.getInt("qtd"),
-                        rs.getInt("idcategoria"));
-                lst_produto.add(produto);
-            }
-            pstmt.close();
+			ResultSet rs = pstmt.executeQuery();
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return lst_produto;
-    }
+			while (rs.next()) {
 
-    @Override
-    public List<Produto> findByWord(String desc) {
+				Produto produto = new Produto(rs.getInt("idproduto"), rs.getString("nome"), rs.getDouble("preco"),
+						rs.getString("vencimento"), rs.getString("lote"), rs.getInt("prescmedica"), rs.getInt("qtd"),
+						rs.getInt("idcategoria"));
+				lst_produto.add(produto);
+			}
+			pstmt.close();
 
-        List<Produto> lst_produto = new ArrayList<>();
-        try {
-            PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto WHERE nome LIKE ?");
-            pstmt.setString(1, "%" + desc + "%");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return lst_produto;
+	}
 
-            ResultSet rs = pstmt.executeQuery();
+	@Override
+	public List<Produto> findByWord(String desc) {
 
-            while (rs.next()) {
+		List<Produto> lst_produto = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conexao.prepareStatement("SELECT * FROM Produto WHERE nome LIKE ?");
+			pstmt.setString(1, "%" + desc + "%");
 
-                Produto produto = new Produto(rs.getInt("idproduto"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco"),
-                        rs.getString("vencimento"),
-                        rs.getString("lote"),
-                        rs.getInt("prescmedica"),
-                        rs.getInt("qtd"),
-                        rs.getInt("idcategoria"));
-                lst_produto.add(produto);
-            }
-            pstmt.close();
+			ResultSet rs = pstmt.executeQuery();
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return lst_produto;
+			while (rs.next()) {
 
-    }
+				Produto produto = new Produto(rs.getInt("idproduto"), rs.getString("nome"), rs.getDouble("preco"),
+						rs.getString("vencimento"), rs.getString("lote"), rs.getInt("prescmedica"), rs.getInt("qtd"),
+						rs.getInt("idcategoria"));
+				lst_produto.add(produto);
+			}
+			pstmt.close();
 
-  
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return lst_produto;
 
-  
+	}
 
 }

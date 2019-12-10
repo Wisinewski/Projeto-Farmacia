@@ -12,6 +12,6 @@ public interface ProdutoDao {
 	boolean deleteById(Integer id);
 	Produto findById(Integer id);
 	List<Produto> findAll();
-        List<Produto> findByWord(String desc);
+    List<Produto> findByWord(String desc);
     
 }

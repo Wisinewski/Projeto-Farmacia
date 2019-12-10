@@ -1,35 +1,33 @@
 package model.entities;
 
-import java.util.Date;
-
 public class Pedido {
-	private Long idpedido;
-	private Date datapedido;
+	private Integer idpedido;
+	private String datapedido;
 	private Double precopedido;
 	
 	public Pedido() {
 	}
 
-	public Pedido(Long idpedido, Date datapedido, Double precopedido) {
+	public Pedido(Integer idpedido, String datapedido, Double precopedido) {
 		super();
 		this.idpedido = idpedido;
 		this.datapedido = datapedido;
 		this.precopedido = precopedido;
 	}
 
-	public Long getIdpedido() {
+	public Integer getIdpedido() {
 		return idpedido;
 	}
 
-	public void setIdpedido(Long idpedido) {
+	public void setIdpedido(Integer idpedido) {
 		this.idpedido = idpedido;
 	}
 
-	public Date getDatapedido() {
+	public String getDatapedido() {
 		return datapedido;
 	}
 
-	public void setDatapedido(Date datapedido) {
+	public void setDatapedido(String datapedido) {
 		this.datapedido = datapedido;
 	}
 
@@ -39,6 +37,10 @@ public class Pedido {
 
 	public void setPrecopedido(Double precopedido) {
 		this.precopedido = precopedido;
+	}
+	
+	public void adicionaPrecoPedido(ProdutoItem produtoItem) {
+		this.precopedido += produtoItem.getPrecoProdutoItem();
 	}
 
 	@Override

@@ -8,17 +8,14 @@ package application;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import db.DB;
-import model.dao.CategoriaDao;
-import model.dao.ProdutoDao;
-import model.dao.impl.CategoriaDaoJDBC;
-import model.dao.impl.ProdutoDaoJDBC;
-import model.entities.Categoria;
-import model.entities.Produto;
+import model.dao.PedidoDao;
+import model.dao.ProdutoItemDao;
+import model.dao.impl.PedidoDaoJDBC;
+import model.dao.impl.ProdutoItemDaoJDBC;
+import model.entities.Pedido;
+import model.entities.ProdutoItem;
 
 /**
  *
@@ -59,20 +56,49 @@ public class Program {
     	
     	List<Produto> listaProdutos = produtoDao.findAll();
     	listaProdutos.stream().forEach(System.out::println);
-      */
-    
-    
+      
     // OPERACAO PRODUTO PESQUISA POR NOME
     
     	ProdutoDao produtoDao = new ProdutoDaoJDBC(DB.getConnection());
- 
-    	
    
     	String desc = "Mateus";
     	List<Produto> listaProdutos = produtoDao.findByWord(desc);
     	listaProdutos.stream().forEach(System.out::println);
       
-        
+    */
+    	
+    	
+    // INSERINDO E "POPULANDO COM ITENS" UM NOVO PEDIDO 
+    	// instancia dao's
+    	PedidoDao pedidoDao = new PedidoDaoJDBC(DB.getConnection());
+    	ProdutoItemDao produtoItemDao = new ProdutoItemDaoJDBC(DB.getConnection());
+    	
+    	// cria entidade pedido com id nulo, data e preco zerado
+    	Pedido pedido = new Pedido(null, "10-12-2019", 0.0);
+    	// metodo insert do pedido já puxa do banco o id gerado automaticamente e seta o id da entidade pedido criada acima
+    	pedidoDao.insert(pedido);
+    	System.out.println(pedido);
+    	
+    	// cria novo produtoItem e insere com parametros (idpedido, idproduto, qtd).  Tambem vai adicionando ao preco total;
+    	ProdutoItem produtoItem = null;
+    	produtoItem = new ProdutoItem(pedido.getIdpedido(), 3, 10);
+    	produtoItemDao.insert(produtoItem);
+    	pedido.adicionaPrecoPedido(produtoItem);
+    	System.out.println(pedido);
+    	produtoItem = new ProdutoItem(pedido.getIdpedido(), 4, 10);
+    	produtoItemDao.insert(produtoItem);
+    	pedido.adicionaPrecoPedido(produtoItem);
+    	System.out.println(pedido);
+    	produtoItem = new ProdutoItem(pedido.getIdpedido(), 8, 10);
+    	produtoItemDao.insert(produtoItem);
+    	pedido.adicionaPrecoPedido(produtoItem);
+    	System.out.println(pedido);
+    	
+    	// finalmente atualiza o pedido em questao no banco já com o preco final
+    	pedidoDao.update(pedido);
+    	
+    	// retorna todos os id's de produtos e suas quantidades de determinado pedido
+    	produtoItemDao.findAllById(pedido.getIdpedido()).stream().forEach(System.out::println);
     }
     
 }
