@@ -69,8 +69,8 @@ public class Program {
     	listaProdutos.stream().forEach(System.out::println);
       
     */
-    	
     /*	
+    	
     // INSERINDO E "POPULANDO COM ITENS" UM NOVO PEDIDO 
     	// instancia dao's
     	PedidoDao pedidoDao = new PedidoDaoJDBC(DB.getConnection());
@@ -102,12 +102,14 @@ public class Program {
     	
     	// retorna todos os id's de produtos e suas quantidades de determinado pedido
     	produtoItemDao.findAllById(pedido.getIdpedido()).stream().forEach(System.out::println);
+        
     }
+    
     */
     }
    
     
        
-     
+
     
 }

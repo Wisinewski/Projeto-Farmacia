@@ -27,6 +27,9 @@ public class PedidoController {
 	public Pedido findById(Integer id) {
 		return pedidoDao.findById(id);
 	}
+        public Double findPriceByID(Integer id) {
+		return pedidoDao.findById(id).getPrecopedido();
+	}
 
 	public List<Pedido> findAll() {
 		return pedidoDao.findAll();

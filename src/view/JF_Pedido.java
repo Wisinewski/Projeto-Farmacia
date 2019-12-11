@@ -5,18 +5,34 @@
  */
 package view;
 
+import controller.PedidoController;
+import db.DB;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.dao.ProdutoItemDao;
+import model.dao.impl.PedidoDaoJDBC;
+import model.dao.impl.ProdutoItemDaoJDBC;
+import model.entities.Pedido;
+import model.entities.ProdutoItem;
 
 
 public class JF_Pedido extends javax.swing.JFrame {
     JF_Menu menu;
-   
+    ProdutoItemDao produtoItemDao ;
+    ProdutoItem produtoItem;
+    Pedido pedido;
+    PedidoController pedidocontroller;
     public JF_Pedido() throws SQLException {
         initComponents();
         menu = new JF_Menu();
         this.setLocationRelativeTo(null);
+    
+        produtoItemDao = new ProdutoItemDaoJDBC(DB.getConnection());
+        pedidocontroller = new PedidoController();
+        produtoItem = new ProdutoItem();
+        
     }
 
     /**
@@ -28,10 +44,23 @@ public class JF_Pedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         btn_voltar = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        txt_pesquisa = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txt_preco = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Jlist = new javax.swing.JList<>();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_voltar.setText("Voltar");
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -39,39 +68,33 @@ public class JF_Pedido extends javax.swing.JFrame {
                 btn_voltarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 74, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_voltar)
-                .addContainerGap(244, Short.MAX_VALUE))
-        );
+        jLabel1.setText("Pedido n°");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 44, -1, -1));
+        jPanel1.add(txt_pesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 41, 125, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 40, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("R$");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 60, 60));
+
+        txt_preco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txt_preco.setForeground(new java.awt.Color(0, 204, 0));
+        jPanel1.add(txt_preco, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 110, 40));
+
+        jScrollPane2.setViewportView(Jlist);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 260, 260));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -80,6 +103,24 @@ public class JF_Pedido extends javax.swing.JFrame {
         this.setVisible(false);
         menu.setVisible(true);
     }//GEN-LAST:event_btn_voltarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+      //  System.out.println(""+produtoItemDao.findAllById(Integer.parseInt(txt_pesquisa.getText())));
+        int id_pedido = Integer.parseInt(txt_pesquisa.getText());
+       
+        List<ProdutoItem> item = produtoItemDao.findAllById(id_pedido);
+        
+      
+        
+        
+        
+        pedidocontroller.findById(id_pedido);
+        
+       
+   
+       txt_preco.setText(""+pedidocontroller.findPriceByID(id_pedido));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +162,15 @@ public class JF_Pedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> Jlist;
     private javax.swing.JToggleButton btn_voltar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txt_pesquisa;
+    private javax.swing.JTextField txt_preco;
     // End of variables declaration//GEN-END:variables
 }

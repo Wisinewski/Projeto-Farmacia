@@ -34,6 +34,9 @@ public class Pedido {
 	public Double getPrecopedido() {
 		return precopedido;
 	}
+        
+        
+        
 
 	public void setPrecopedido(Double precopedido) {
 		this.precopedido = precopedido;
