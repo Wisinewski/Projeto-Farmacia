@@ -20,9 +20,7 @@ public class ProdutoController {
     }
     
     public boolean update(Produto produto) {
-    	boolean t = produtoDao.update(produto);
-        return t;
-        
+    	return produtoDao.update(produto);
     }
     
     public boolean deleteById(Integer id) {
@@ -44,9 +42,4 @@ public class ProdutoController {
     	return listaProdutos;
     }
   
-    
-    
-     
-    
-
 }

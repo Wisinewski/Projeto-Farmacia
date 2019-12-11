@@ -3,5 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="D:/Farmacia/sqlite-jdbc-3.27.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wisinewski/Downloads/org-netbeans-modules-swingapp.jar/org-netbeans-modules-swingapp.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

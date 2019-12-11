@@ -5,17 +5,17 @@
  */
 package view;
 
-import controller.PedidoController;
-import controller.ProdutoController;
-import db.DB;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
+
 import javax.swing.table.DefaultTableModel;
+
+import controller.PedidoController;
+import controller.ProdutoController;
+import db.DB;
 import model.dao.ProdutoItemDao;
-import model.dao.impl.PedidoDaoJDBC;
 import model.dao.impl.ProdutoItemDaoJDBC;
 import model.entities.Pedido;
 import model.entities.Produto;

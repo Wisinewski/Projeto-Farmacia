@@ -1,25 +1,21 @@
 package view;
 
-import com.sun.media.sound.ModelOscillator;
-import controller.ProdutoController;
-import db.DB;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
-import model.dao.CategoriaDao;
+
+import controller.ProdutoController;
+import db.DB;
 import model.dao.PedidoDao;
-import model.dao.ProdutoDao;
 import model.dao.ProdutoItemDao;
-import model.dao.impl.CategoriaDaoJDBC;
 import model.dao.impl.PedidoDaoJDBC;
-import model.dao.impl.ProdutoDaoJDBC;
 import model.dao.impl.ProdutoItemDaoJDBC;
-import model.entities.Categoria;
 import model.entities.Pedido;
 import model.entities.Produto;
 import model.entities.ProdutoItem;
