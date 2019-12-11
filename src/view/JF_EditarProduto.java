@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.entities.Categoria;
 import model.entities.Produto;
 
@@ -20,13 +21,16 @@ public class JF_EditarProduto extends javax.swing.JFrame {
     Produto p;
     Integer idProdutoEdit;
     String nm_categoria;
+    int receita;
     CategoriaController categoria = new CategoriaController();
     Categoria objCategoria = new Categoria();
     // Preenche a lista com a lista de categoria do banco de dados
     List<Categoria> lst_categoria;
 
     public JF_EditarProduto(Integer id_produto, String id_categoria) throws SQLException {
+
         initComponents();
+        this.setLocationRelativeTo(null);
         lst_categoria = categoria.listarCategoria();
         carregarCategorias();
         this.idProdutoEdit = id_produto;
@@ -227,9 +231,9 @@ public class JF_EditarProduto extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(cmb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_cancelar)
-                    .addComponent(btn_editar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_editar)
+                    .addComponent(btn_cancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -241,8 +245,14 @@ public class JF_EditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_categoriaActionPerformed
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-        Integer id = null;
-        int qtd = (Integer) qtd_produto.getValue();
+        objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
+        atualizarobjProduto();
+
+        if (pc.update(p)) {
+            JOptionPane.showMessageDialog(null, "Produto Atualizado!!", "Atualizacao", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar o produto!!", "Atualizacao", JOptionPane.ERROR);
+        }
 
 
     }//GEN-LAST:event_btn_editarActionPerformed
@@ -264,6 +274,11 @@ public class JF_EditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_voltarActionPerformed
 
     private void rb_receitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_receitaActionPerformed
+        if (rb_receita.isSelected()) {
+            receita = 1;
+        } else {
+            receita = 0;
+        }
 
 
     }//GEN-LAST:event_rb_receitaActionPerformed
@@ -352,7 +367,7 @@ public class JF_EditarProduto extends javax.swing.JFrame {
      */
     private void preencherosCampos() {
         pc = new ProdutoController();
-        Produto p = pc.findById(idProdutoEdit);
+        p = pc.findById(idProdutoEdit);
 
         txt_nmProduto.setText(p.getNome());
         txt_lote.setText(p.getLote());
@@ -363,6 +378,31 @@ public class JF_EditarProduto extends javax.swing.JFrame {
             rb_receita.setSelected(true);
         }
         cmb_categoria.setSelectedItem(nm_categoria);
+    }
+
+    private void atualizarobjProduto() {
+        p.setNome(txt_nmProduto.getText());
+        p.setLote(txt_lote.getText());
+        p.setPreco(Double.parseDouble(txt_preco.getText()));
+        p.setVencimento(txt_vencimento.getText());
+        p.setQtd((Integer) qtd_produto.getValue());
+        p.setPrescricao(receita);
+        p.setCategoria(objCategoria);
+
+    }
+
+    private Categoria procurarCategoria(String categ_selecionada) {
+        try {
+            for (Categoria c : lst_categoria) {
+                if (c.getNome().equals(categ_selecionada)) {
+
+                    return c;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        return null;
     }
 
 }

@@ -6,6 +6,7 @@
 package application;
 
 
+import controller.ProdutoController;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -13,8 +14,10 @@ import db.DB;
 import model.dao.PedidoDao;
 import model.dao.ProdutoItemDao;
 import model.dao.impl.PedidoDaoJDBC;
+import model.dao.impl.ProdutoDaoJDBC;
 import model.dao.impl.ProdutoItemDaoJDBC;
 import model.entities.Pedido;
+import model.entities.Produto;
 import model.entities.ProdutoItem;
 
 /**
@@ -67,7 +70,7 @@ public class Program {
       
     */
     	
-    	
+    /*	
     // INSERINDO E "POPULANDO COM ITENS" UM NOVO PEDIDO 
     	// instancia dao's
     	PedidoDao pedidoDao = new PedidoDaoJDBC(DB.getConnection());
@@ -75,7 +78,7 @@ public class Program {
     	
     	// cria entidade pedido com id nulo, data e preco zerado
     	Pedido pedido = new Pedido(null, "10-12-2019", 0.0);
-    	// metodo insert do pedido já puxa do banco o id gerado automaticamente e seta o id da entidade pedido criada acima
+    	// metodo insert do pedido jï¿½ puxa do banco o id gerado automaticamente e seta o id da entidade pedido criada acima
     	pedidoDao.insert(pedido);
     	System.out.println(pedido);
     	
@@ -94,11 +97,17 @@ public class Program {
     	pedido.adicionaPrecoPedido(produtoItem);
     	System.out.println(pedido);
     	
-    	// finalmente atualiza o pedido em questao no banco já com o preco final
+    	// finalmente atualiza o pedido em questao no banco jï¿½ com o preco final
     	pedidoDao.update(pedido);
     	
     	// retorna todos os id's de produtos e suas quantidades de determinado pedido
     	produtoItemDao.findAllById(pedido.getIdpedido()).stream().forEach(System.out::println);
     }
+    */
+    }
+   
+    
+       
+     
     
 }

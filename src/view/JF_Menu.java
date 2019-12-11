@@ -37,6 +37,7 @@ public class JF_Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btn_sair = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -82,6 +83,13 @@ public class JF_Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Venda");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,14 +103,13 @@ public class JF_Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_categoria)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(btn_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                    .addComponent(btn_categoria)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +126,9 @@ public class JF_Menu extends javax.swing.JFrame {
                     .addComponent(btn_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
@@ -190,6 +199,18 @@ public class JF_Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            JF_Venda venda = new JF_Venda();
+            this.dispose();
+            venda.setVisible(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JF_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +254,7 @@ public class JF_Menu extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_categoria;
     private javax.swing.JButton btn_produto;
     private javax.swing.JButton btn_sair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

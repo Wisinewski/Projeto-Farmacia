@@ -58,20 +58,36 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 	}
 
 	@Override
-	public void update(Produto produto) {
+	public boolean update(Produto produto) {
 		PreparedStatement st = null;
 		try {
-			st = conexao.prepareStatement("UPDATE Categoria " + "SET nome = ? " + "SET preco = ? "
-					+ "SET vencimento = ? " + "SET lote = ? " + "SET prescmedica = ? " + "SET qtd = ? "
-					+ "SET idcategoria = ? " + "WHERE idcategoria = ?");
+			st = conexao.prepareStatement("UPDATE Produto SET nome = ?,"
+                                + "preco=?,"
+				+ "vencimento=?,"
+                                + "lote=?,"
+                                + "prescmedica=?,"
+                                + "qtd=?,"
+			        + "idcategoria=?"
+                                + "WHERE idproduto=?");
 
 			st.setString(1, produto.getNome());
-			st.setInt(2, produto.getId());
+			st.setDouble(2, produto.getPreco());
+                        st.setString(3, produto.getVencimento());
+                        st.setString(4, produto.getLote());
+                        st.setInt(5, produto.getPrescricao());
+                        st.setInt(6, produto.getQtd());
+                        st.setInt(7, produto.getCategoria().getId());
+                        st.setInt(8, produto.getId());
 
-			st.executeUpdate();
+			if(st.executeUpdate() ==1)
+                        {
+                            return true;
+                        }
+                        
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+                return false;
 	}
 
 	@Override

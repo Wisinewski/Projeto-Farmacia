@@ -19,8 +19,10 @@ public class ProdutoController {
         return cadastrar;
     }
     
-    public void update(Produto produto) {
-    	produtoDao.update(produto);
+    public boolean update(Produto produto) {
+    	boolean t = produtoDao.update(produto);
+        return t;
+        
     }
     
     public boolean deleteById(Integer id) {

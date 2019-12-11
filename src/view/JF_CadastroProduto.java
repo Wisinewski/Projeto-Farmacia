@@ -242,26 +242,24 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         try {
-        Integer id = null;
-		int qtd = (Integer) qtd_produto.getValue();
-         
-		//pegando a categoria para realizar pesquisa no Banco
-		objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
-		// Passando os parametros para a classe Produto
-		Produto produto = new Produto(id, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), txt_vencimento.getText(), txt_lote.getText(), receita, qtd, objCategoria.getId());
-		ProdutoController cadastroProduto = new ProdutoController();
-		    
-                            if(cadastroProduto.insert(produto))
-                {
-                    JOptionPane.showMessageDialog(null,"Produto Cadastrado!!","Cadastro produto", JOptionPane.INFORMATION_MESSAGE);
-                }
-            
+            Integer id = null;
+            int qtd = (Integer) qtd_produto.getValue();
+
+            //pegando a categoria para realizar pesquisa no Banco
+            objCategoria = procurarCategoria(cmb_categoria.getSelectedItem().toString());
+            // Passando os parametros para a classe Produto
+            Produto produto = new Produto(id, txt_nmProduto.getText(), Double.parseDouble(txt_preco.getText()), txt_vencimento.getText(), txt_lote.getText(), receita, qtd, objCategoria.getId());
+            ProdutoController cadastroProduto = new ProdutoController();
+
+            if (cadastroProduto.insert(produto)) {
+                JOptionPane.showMessageDialog(null, "Produto Cadastrado!!", "Cadastro produto", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null,"Erro ao Cadastrar o Produto!!","Cadastro produto", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar o Produto!!", "Cadastro produto", JOptionPane.ERROR_MESSAGE);
         }
-              
-               
-                limpar();
+
+        limpar();
 
     }//GEN-LAST:event_btn_cadastrarActionPerformed
 
@@ -289,12 +287,12 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
         try {
             menu = new JF_Menu();
             menu.show(true);
-             this.dispose();
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(JF_CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-       
+
+
     }//GEN-LAST:event_btn_voltarActionPerformed
 
     /**
@@ -376,15 +374,11 @@ public class JF_CadastroProduto extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        
+
         return null;
     }
 
-    private LocalDate transformarData(String campodata) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate data = LocalDate.parse(campodata, formato);
-        return data;
-    }
+ 
 
     private void limpar() {
         txt_lote.setText("");
