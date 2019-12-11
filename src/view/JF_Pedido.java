@@ -6,33 +6,42 @@
 package view;
 
 import controller.PedidoController;
+import controller.ProdutoController;
 import db.DB;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import model.dao.ProdutoItemDao;
 import model.dao.impl.PedidoDaoJDBC;
 import model.dao.impl.ProdutoItemDaoJDBC;
 import model.entities.Pedido;
+import model.entities.Produto;
 import model.entities.ProdutoItem;
 
-
 public class JF_Pedido extends javax.swing.JFrame {
+
+    DefaultTableModel modelo;
     JF_Menu menu;
-    ProdutoItemDao produtoItemDao ;
+    ProdutoItemDao produtoItemDao;
     ProdutoItem produtoItem;
+    ProdutoController produtocontrol;
     Pedido pedido;
     PedidoController pedidocontroller;
+
     public JF_Pedido() throws SQLException {
         initComponents();
+
         menu = new JF_Menu();
         this.setLocationRelativeTo(null);
-    
+        modelo = (DefaultTableModel) JLista.getModel();
         produtoItemDao = new ProdutoItemDaoJDBC(DB.getConnection());
         pedidocontroller = new PedidoController();
         produtoItem = new ProdutoItem();
-        
+        produtocontrol = new ProdutoController();
+
     }
 
     /**
@@ -52,8 +61,8 @@ public class JF_Pedido extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txt_preco = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Jlist = new javax.swing.JList<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JLista = new javax.swing.JTable();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -84,17 +93,37 @@ public class JF_Pedido extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("R$");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 60, 60));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 60, 60));
 
         txt_preco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txt_preco.setForeground(new java.awt.Color(0, 204, 0));
-        jPanel1.add(txt_preco, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 110, 40));
+        jPanel1.add(txt_preco, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 110, 40));
 
-        jScrollPane2.setViewportView(Jlist);
+        JLista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 260, 260));
+            },
+            new String [] {
+                "Nome", "R$", "Qtd", "Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 380));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(JLista);
+        if (JLista.getColumnModel().getColumnCount() > 0) {
+            JLista.getColumnModel().getColumn(1).setResizable(false);
+            JLista.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 380, 280));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,21 +134,34 @@ public class JF_Pedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_voltarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-      //  System.out.println(""+produtoItemDao.findAllById(Integer.parseInt(txt_pesquisa.getText())));
+           modelo.setNumRows(0);
+        //  System.out.println(""+produtoItemDao.findAllById(Integer.parseInt(txt_pesquisa.getText())));
         int id_pedido = Integer.parseInt(txt_pesquisa.getText());
-       
+
         List<ProdutoItem> item = produtoItemDao.findAllById(id_pedido);
-        
-      
-        
-        
-        
+
+        int i = 0;
+        for (ProdutoItem c : item) {
+            Produto produto = produtocontrol.findById(item.get(i).getIdproduto());
+
+            modelo.addRow(new Object[]{
+                produto.getNome(),
+                produto.getPreco(),
+                item.get(i).getQtd(),
+                item.get(i).getPrecoProdutoItem()
+
+            });
+
+            i++;
+
+         
+        }
+
+        System.out.println("" + pedidocontroller.findPriceByID(id_pedido));
+
         pedidocontroller.findById(id_pedido);
-        
-       
-   
-       txt_preco.setText(""+pedidocontroller.findPriceByID(id_pedido));
+
+        txt_preco.setText("" + pedidocontroller.findPriceByID(id_pedido));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -162,14 +204,14 @@ public class JF_Pedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> Jlist;
+    private javax.swing.JTable JLista;
     private javax.swing.JToggleButton btn_voltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txt_pesquisa;
     private javax.swing.JTextField txt_preco;
     // End of variables declaration//GEN-END:variables
