@@ -56,28 +56,26 @@ public class JF_Venda extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Jt_Produto = new javax.swing.JTable();
         txt_nome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btn_voltar = new javax.swing.JToggleButton();
         btn_adicionar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         JT_preco = new javax.swing.JTable();
         txt_total = new javax.swing.JTextField();
         btn_finalizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btn_voltar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Estoque");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 12, 198, -1));
-
-        Jt_Produto.setBackground(new java.awt.Color(204, 204, 255));
+        Jt_Produto.setBackground(new java.awt.Color(204, 255, 255));
         Jt_Produto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -108,35 +106,30 @@ public class JF_Venda extends javax.swing.JFrame {
             Jt_Produto.getColumnModel().getColumn(4).setHeaderValue("Qtd Estoquel");
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 113, 350, 153));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 350, 153));
 
         txt_nome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nomeKeyPressed(evt);
             }
         });
-        jPanel1.add(txt_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 52, 157, -1));
+        jPanel1.add(txt_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 157, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Nome");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 55, 40, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 40, -1));
 
-        btn_voltar.setText("Voltar");
-        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_voltarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_voltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 74, -1));
-
+        btn_adicionar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_adicionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_adicionar.setText("Adicionar");
         btn_adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_adicionarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_adicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 39, -1, 42));
+        jPanel1.add(btn_adicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 90, 42));
 
-        JT_preco.setBackground(new java.awt.Color(204, 204, 255));
+        JT_preco.setBackground(new java.awt.Color(204, 255, 255));
         JT_preco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -159,10 +152,10 @@ public class JF_Venda extends javax.swing.JFrame {
             }
         });
         JT_preco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 JT_precoInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         JT_preco.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -175,36 +168,57 @@ public class JF_Venda extends javax.swing.JFrame {
             JT_preco.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 113, 269, 153));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 269, 153));
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel1.add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, 113, 51));
+        txt_total.setForeground(new java.awt.Color(0, 0, 204));
+        jPanel1.add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 70, 40));
 
-        btn_finalizar.setText("Finaliza");
+        btn_finalizar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_finalizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_finalizar.setText("Finalizar");
         btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_finalizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 37, -1, 46));
+        jPanel1.add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 220, 80, 46));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("R$");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 43, 51));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 43, 51));
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setLayout(null);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Venda");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(310, 30, 74, 29);
+
+        btn_voltar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_voltar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_voltar);
+        btn_voltar.setBounds(20, 20, 74, 23);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -223,7 +237,7 @@ public class JF_Venda extends javax.swing.JFrame {
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
         String numero = JOptionPane.showInputDialog("Qtd");
         qtd = Integer.parseInt(numero);
-        System.out.println("" + qtd);
+      //  System.out.println("" + qtd);
 
         transfereinfo();
         addlistpreco(id_produto, qtd, nome, preco);
@@ -299,10 +313,11 @@ public class JF_Venda extends javax.swing.JFrame {
     private javax.swing.JButton btn_adicionar;
     private javax.swing.JButton btn_finalizar;
     private javax.swing.JToggleButton btn_voltar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField txt_nome;
